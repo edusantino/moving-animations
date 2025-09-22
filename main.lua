@@ -6,7 +6,17 @@ local square
 function love.load()
     love.window.setMode(w, h, {resizable=false})
 
-    square = Square:new(20, h / 2)
+    local params = {
+        x = 20,
+        y = h / 2,
+        anim_params = {
+            anim_type = "learp",
+            anim_duration = 4,
+            from = 20,
+            to = w - 60
+        }
+    }
+    square = Square:new(params)
 end
 
 function love.update(dt)

@@ -1,10 +1,8 @@
 Anim = {}
 Anim.__index = Anim
 
-function Anim:new()
-    local self = setmetatable({}, Anim)
-    return self
-end
+-- anim helper instance 
+function Anim:new() return setmetatable({}, Anim) end
 
 function Anim:learp(a, b, n) return a + (b - a) * n end
 
