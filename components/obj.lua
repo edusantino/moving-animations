@@ -12,7 +12,10 @@ function Obj:new(params)
     self.y = params.y
     self.size = 30
     self.anim_duration = 3 or anim_params.anim_duration
-    self.anim_type = anim_params.anim_type or "lerp"
+    self.anim_type_begin = anim_params.anim_type_begin
+    self.anim_type_end = anim_params.anim_type_end
+    self.break_point = anim_params.break_point or 0.8
+
     self.elapsed = 0
     self.from, self.to = anim_params.from or 0, anim_params.to or 0
     return self
@@ -28,16 +31,14 @@ function Obj:update(dt)
 end
 
 function Obj:animate()
-    local break_point = 0.8
-    
-    if self.norm <= break_point then
-        local segment_norm = self.norm / break_point
-        local eased = anim:easeByType(self.anim_type, segment_norm)
-        return anim:lerp(self.from, self.to, eased * break_point)
+    if self.norm <= self.break_point then
+        local segment_norm = self.norm / self.break_point
+        local eased = anim:easeByType(self.anim_type_begin, segment_norm)
+        return anim:lerp(self.from, self.to, eased * self.break_point)
     else
-        local segment_norm = (self.norm - break_point) / (1 - break_point)
-        local eased = anim:easeByType(self.anim_type, segment_norm)
-        return anim:lerp(self.from, self.to, break_point + eased * (1 - break_point))
+        local segment_norm = (self.norm - self.break_point) / (1 - self.break_point)
+        local eased = anim:easeByType(self.anim_type_end, segment_norm)
+        return anim:lerp(self.from, self.to, self.break_point + eased * (1 - self.break_point))
     end
 end
 

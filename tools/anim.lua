@@ -24,6 +24,7 @@ function Anim:easeByType(type, t)
     if type == "easeOutQuad" then return self:easeOutQuad(t) end
     if type == "easeOutCubic" then return self:easeOutCubic(t) end
     if type == "easeInCubic" then return self:easeInCubic(t) end
+    if type == "lerp" then return t end
 end
 
 return Anim
