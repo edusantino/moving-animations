@@ -1,6 +1,54 @@
 Obj = {}
 Obj.__index = Obj
 
+local AnimType = {
+    LERP = "lerp",
+    EASE_IN_QUAD = "easeInQuad",
+    EASE_OUT_QUAD = "easeInOutQuad"
+}
+
+function Obj:getMockList()
+    local square_list = {}
+    table.insert(square_list, self:new({
+        x = 20,
+        y = 600 / 2 - 80,
+        anim_params = {
+            anim_type_begin = AnimType.EASE_OUT_QUAD,
+            anim_type_end = AnimType.EASE_IN_QUAD,
+            anim_duration = 4,
+            from = 20,
+            to = 800 - 60,
+            break_point = 0.8
+        }
+    }))
+
+    table.insert(square_list, self.new({
+        x = 20,
+        y = (600 / 2),
+        anim_params = {
+            anim_type_begin = AnimType.LERP,
+            anim_type_end = AnimType.EASE_OUT_QUAD,
+            anim_duration = 4,
+            from = 20,
+            to = 800 - 60,
+            break_point = 0.8
+        }
+    }))
+
+    table.insert(square_list, self.new({
+        x = 20,
+        y = (600 / 2) + 80,
+        anim_params = {
+            anim_type_begin = AnimType.LERP,
+            anim_type_end = AnimType.LERP,
+            anim_duration = 4,
+            from = 20,
+            to = 800 - 60,
+            break_point = 0.9
+        }
+    }))
+end
+
 local Anim = require("tools.anim")
 local anim = Anim:new()
 
@@ -44,6 +92,7 @@ end
 
 function Obj:draw()
     love.graphics.rectangle("line", self.x, self.y, self.size, self.size)
+    love.graphics.line(20, self.y + self.size + 5, 800 - 20, self.y + self.size + 5)
     -- TODO self:drawHud()
 end
 
