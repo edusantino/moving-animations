@@ -1,7 +1,7 @@
 local w, h = 800, 600
 
 local Square = require("components.obj")
-local square_list = {}
+local square_list = Square:getMockList()
 
 local Hud = require("components.hud")
 local hud = {}
@@ -12,7 +12,6 @@ function love.load()
     hud = Hud:new()
 
     square_list = Square:getMockList()
-
 end
 
 function love.update(dt)

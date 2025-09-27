@@ -9,7 +9,8 @@ local AnimType = {
 
 function Obj:getMockList()
     local square_list = {}
-    table.insert(square_list, self:new({
+
+    table.insert(square_list, Obj:new({
         x = 20,
         y = 600 / 2 - 80,
         anim_params = {
@@ -22,7 +23,7 @@ function Obj:getMockList()
         }
     }))
 
-    table.insert(square_list, self.new({
+    table.insert(square_list, Obj:new({
         x = 20,
         y = (600 / 2),
         anim_params = {
@@ -35,7 +36,7 @@ function Obj:getMockList()
         }
     }))
 
-    table.insert(square_list, self.new({
+    table.insert(square_list, Obj:new({
         x = 20,
         y = (600 / 2) + 80,
         anim_params = {
@@ -47,6 +48,8 @@ function Obj:getMockList()
             break_point = 0.9
         }
     }))
+
+    return square_list
 end
 
 local Anim = require("tools.anim")
